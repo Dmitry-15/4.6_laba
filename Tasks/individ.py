@@ -15,7 +15,7 @@ class Human:
 
 
 @dataclass
-class Staff:
+class People:
     people: List[Human] = field(default_factory=lambda: [])
 
     def add(self, name, zodiac, year):
@@ -121,7 +121,7 @@ class Staff:
 
 
 if __name__ == '__main__':
-    staff = Staff()
+    schedule = People()
     while True:
         command = input(">>> ").lower()
 
@@ -135,16 +135,16 @@ if __name__ == '__main__':
             zodiac = input("Знак зодиака: ")
             year = input("Дата рождения: ")
 
-            staff.add(name, zodiac, year)
+            schedule.add(name, zodiac, year)
 
         elif command == 'list':
             # Вывести список людей.
-            print(staff)
+            print(schedule)
 
         elif command.startswith('select '):
             parts = command.split(maxsplit=1)
             # Запросить работника по имени.
-            selected = staff.select()
+            selected = schedule.select()
 
             # Вывести результаты запроса.
             if selected:
@@ -160,20 +160,20 @@ if __name__ == '__main__':
             # Разбить команду на части для имени файла.
             parts = command.split(maxsplit=1)
             # Загрузить данные из файла.
-            staff.load(parts[1])
+            schedule.load(parts[1])
 
         elif command.startswith('save '):
             # Разбить команду на части для имени файла.
             parts = command.split(maxsplit=1)
             # Сохранить данные в файл.
-            staff.save(parts[1])
+            schedule.save(parts[1])
 
         elif command == 'help':
             # Вывести справку о работе с программой.
             print("Список команд:\n")
             print("add - добавить человека;")
             print("list - вывести список людей;")
-            print("select <1> - запросить человека с заданным именем;")
+            print("select <ФИО> - запросить человека с заданным именем;")
             print("load <имя_файла> - загрузить данные из файла;")
             print("save <имя_файла> - сохранить данные в файл;")
             print("help - отобразить справку;")
